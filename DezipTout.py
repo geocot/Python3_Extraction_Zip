@@ -1,17 +1,19 @@
-# -*- coding: utf-8 -*-
 """
-Created on Thu Nov  2 09:24:06 2017
-Permet l'extraction des fichiers Zip dans un même répertoire. En Ptyhon 3.
+Created on Mon Jan  23 2023
+Permet l'extraction des fichiers Zip dans un même répertoire. En Python 3.
 @author: mcouture
 """
 import zipfile,os
-
-print (os.curdir)
-#Liste des fichiers zip. 
+basePath = r"Chemin"
+os.chdir(basePath)
+print(os.curdir)
+#Liste des fichiers zip.
 listF = os.listdir(os.curdir)
 
 for f in listF:
     if ((f[(len(f)-3):]) == "zip"):
+        file_name = os.path.basename(f).replace(".zip", "")
+        os.makedirs(file_name)
         zip = zipfile.ZipFile(f)
         print("Extraction de " + f )
-        zip.extractall(os.curdir)
+        zip.extractall(os.curdir + "/" + file_name)
